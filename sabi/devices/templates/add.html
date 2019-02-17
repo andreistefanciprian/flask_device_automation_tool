@@ -4,7 +4,7 @@
 
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
     {% for error in form.errors %}
-  <strong>Holy guacamole!</strong> {{ error }} <br>
+  <strong>There is an issue with this field:</strong> {{ error }} <br>
   {% endfor %}
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
@@ -27,27 +27,27 @@
     <table>
       <tr>
         <td>{{ form.hostname.label }}</td>
-        <td>{{ form.hostname() }}</td>
+        <td>{{ form.hostname(placeholder='MIK2.LondonSW') }}</td>
       </tr>
         <tr>
         <td>{{ form.nasid.label }}</td>
-        <td>{{ form.nasid() }}</td>
+        <td>{{ form.nasid(placeholder='NASID12345') }}</td>
       </tr>
       <tr>
         <td>{{ form.ip.label }}</td>
-        <td>{{ form.ip() }}</td>
+        <td>{{ form.ip(placeholder='192.168.0.11') }}</td>
       </tr>
       <tr>
         <td>{{ form.gateway.label }}</td>
-        <td>{{ form.gateway() }}</td>
+        <td>{{ form.gateway(placeholder='192.168.0.1') }}</td>
       </tr>
       <tr>
         <td>{{ form.wan.label }}</td>
-        <td>{{ form.wan() }}</td>
+        <td>{{ form.wan(placeholder='35.12.75.128/30') }}</td>
       </tr>
       <tr>
         <td>{{ form.location.label }}</td>
-        <td>{{ form.location() }}</td>
+        <td>{{ form.location(placeholder='LondonSW') }}</td>
       </tr>
       <tr>
         <td></td>
