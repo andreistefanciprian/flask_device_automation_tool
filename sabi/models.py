@@ -2,13 +2,7 @@
 # setup db inside the __init__.py
 from sabi import db
 
-
-
-############################################
-
-        # SQL DATABASE AND MODELS
-
-##########################################
+# SQL DATABASE AND MODELS
 
 class Device(db.Model):
 

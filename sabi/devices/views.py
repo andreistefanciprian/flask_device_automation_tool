@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for
 from sabi import db
 from sabi.models import Device
 from sabi.devices.forms import AddForm, DelForm
+from sqlalchemy.exc import IntegrityError
 
 devices_blueprint = Blueprint('devices', __name__, template_folder = 'templates')
 
@@ -20,10 +21,13 @@ def add():
         location = form.location.data
 
         # Add new Device to database
-        new_device = Device(hostname,nasid,ip,gateway,wan,location)
-        db.session.add(new_device)
-        db.session.commit()
-
+        try:
+            new_device = Device(hostname,nasid,ip,gateway,wan,location)
+            db.session.add(new_device)
+            db.session.commit()
+        except IntegrityError:
+            db.session.rollback()
+            return '<h1>This member already exists!</h1>'
         return redirect(url_for('devices.list'))
 
     return render_template('add.html',form=form)
