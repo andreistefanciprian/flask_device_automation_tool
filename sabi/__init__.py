@@ -16,6 +16,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 Migrate(app,db)
 
-
 from sabi.devices.views import devices_blueprint
 app.register_blueprint(devices_blueprint, url_prefix='/devices')
+
+from sabi.core.views import core_blueprint
+app.register_blueprint(core_blueprint)
