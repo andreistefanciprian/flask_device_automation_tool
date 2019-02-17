@@ -4,11 +4,21 @@
   <h1>Did a device get broken or you just want to remove it from production?</h1>
   <hr>
   <p>Fill out the form to remove the device from the list.</p>
+
   <form method="POST">
       {# This hidden_tag is a CSRF security feature. #}
       {{ form.hidden_tag() }}
-      {{ form.id.label }} {{ form.id() }}
-      {{ form.submit() }}
+
+      <table>
+
+          <tr>
+              <td>{{ form.id.label }} </td>
+              <td>{{ form.id(class="form-control form-control-sm", placeholder='3') }}</td>
+              <td>{{ form.submit(class="btn btn-primary") }}</td>
+          </tr>
+      </table>
+
   </form>
+
 </div>
 {% endblock %}

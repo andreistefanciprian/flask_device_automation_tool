@@ -21,38 +21,41 @@
   <hr>
   <p>Add a new device with the form below.</p>
 
-  <form method="POST">
+  <form method="POST" >
     {# This hidden_tag is a CSRF security feature. #}
     {{ form.hidden_tag() }}
 
     <table>
       <tr>
         <td>{{ form.hostname.label }}</td>
-        <td>{{ form.hostname(placeholder='MIK2.LondonSW') }}</td>
+        <td>{{ form.hostname(class="form-control form-control-sm", placeholder='MIK2.LondonSW') }}</td>
       </tr>
         <tr>
         <td>{{ form.nasid.label }}</td>
-        <td>{{ form.nasid(placeholder='NASID12345') }}</td>
+        <td>{{ form.nasid(class="form-control form-control-sm", placeholder='NASID12345') }}</td>
       </tr>
       <tr>
         <td>{{ form.ip.label }}</td>
-        <td>{{ form.ip(placeholder='192.168.0.11') }}</td>
+        <td>{{ form.ip(class="form-control form-control-sm", placeholder='192.168.0.11') }}</td>
+        <td><small id="" class="text-muted">Doesn't take ip with mask. Eg 1.1.1.1/24</small></td>
       </tr>
       <tr>
         <td>{{ form.gateway.label }}</td>
-        <td>{{ form.gateway(placeholder='192.168.0.1') }}</td>
+        <td>{{ form.gateway(class="form-control form-control-sm", placeholder='192.168.0.1') }}</td>
+        <td><small id="" class="text-muted">Must be in the same subnet as the 'IP Address of Device:' field.</small></td>
       </tr>
       <tr>
         <td>{{ form.wan.label }}</td>
-        <td>{{ form.wan(placeholder='35.12.75.128/30') }}</td>
+        <td>{{ form.wan(class="form-control form-control-sm", placeholder='35.12.75.128/30') }}</td>
+        <td><small id="" class="text-muted">Must be a public IP Address, reacheable on internet.</small></td>
       </tr>
       <tr>
         <td>{{ form.location.label }}</td>
-        <td>{{ form.location(placeholder='LondonSW') }}</td>
+        <td>{{ form.location(class="form-control form-control-sm", placeholder='LondonSW') }}</td>
       </tr>
       <tr>
         <td></td>
-        <td>{{ form.submit() }}</td>
+        <td>{{ form.submit(class="btn btn-primary") }}</td>
       </tr>
     </table>
 
