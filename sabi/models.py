@@ -15,7 +15,7 @@ class Device(db.Model):
     __tablename__ = 'devices'
 
     id = db.Column(db.Integer,primary_key = True)
-    hostname = db.Column(db.Text)
+    hostname = db.Column(db.Text, unique=True, index=True)
     nasid = db.Column(db.Text)
     ip = db.Column(db.Text)
     gateway = db.Column(db.Text)
