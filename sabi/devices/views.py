@@ -25,6 +25,7 @@ def add():
             new_device = Device(hostname,nasid,ip,gateway,wan,location)
             db.session.add(new_device)
             db.session.commit()
+        # Other Db errors to be added here
         except IntegrityError:
             db.session.rollback()
             return '<h1>This member already exists!</h1>'

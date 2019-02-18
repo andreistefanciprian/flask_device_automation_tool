@@ -2,7 +2,6 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SubmitField
 from wtforms.validators import DataRequired, IPAddress
 
-
 class AddForm(FlaskForm):
 
     #validators = [DataRequired(message='This field is required!'), IPAddress(message='Must be an IP Address. Eg 192.168.1.11')
