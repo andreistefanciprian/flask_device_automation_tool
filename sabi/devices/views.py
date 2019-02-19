@@ -4,6 +4,8 @@ from sabi.models import Device
 from sabi.devices.forms import AddForm, DelForm, UpdateForm
 from sqlalchemy.exc import IntegrityError
 
+import os
+
 devices_blueprint = Blueprint('devices', __name__, template_folder = 'templates')
 
 
@@ -93,5 +95,31 @@ def update(device_id):
         form.location.data = device.location
     return render_template('update.html',form=form)
 
+# Show Status
+@devices_blueprint.route('/<int:device_id>/status', methods=['GET', 'POST'])
+def ops_status(device_id):
 
+    device = Device.query.get_or_404(device_id)
 
+    device_wan = device.wan
+    device_hostname = device.hostname
+    device_nasid = device.nasid
+    device_location = device.location
+
+    # Device commands (to be optimized with dictionaries via python and jinja + API/paramiko) 
+    export_out = os.popen(f"sshpass -p 'Simpl3Passw0rd' ssh -o StrictHostKeyChecking=no admin@{device.wan} 'export'").read()
+    file_out = os.popen(f"sshpass -p 'Simpl3Passw0rd' ssh -o StrictHostKeyChecking=no admin@{device.wan} 'file print'").read()
+    system_routerboard_out  = os.popen(f"sshpass -p 'Simpl3Passw0rd' ssh -o StrictHostKeyChecking=no admin@{device.wan} 'system routerboard print'").read()
+    system_package_out  = os.popen(f"sshpass -p 'Simpl3Passw0rd' ssh -o StrictHostKeyChecking=no admin@{device.wan} 'system package print'").read()
+    ip_route_out  = os.popen(f"sshpass -p 'Simpl3Passw0rd' ssh -o StrictHostKeyChecking=no admin@{device.wan} 'ip route print'").read()
+
+    return render_template('ops_status.html', 
+        device_wan=device_wan, 
+        device_hostname=device_hostname, 
+        device_nasid=device_nasid, 
+        device_location=device_location,
+        export_out=export_out,
+        file_out=file_out,
+        system_routerboard_out=system_routerboard_out,
+        system_package_out=system_package_out,
+        ip_route_out=ip_route_out)

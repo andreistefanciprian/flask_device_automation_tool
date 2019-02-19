@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+  <h1>Device Status Page </h1>
+  <hr>
+  <ul>Device details:
+  	<li>Hostname: {{ device_hostname }}</li>
+  	<li>WAN IP Address: {{ device_wan }}</li>
+  	<li>NASID: {{ device_nasid }}</li>
+  	<li>Location: {{ device_location }}</li>
+  </ul>
+  <br>
+  
+  <p><b>/export</b></p>
+  <pre><code>{{  export_out }}</code></pre>
+  
+  <p><b>/file print</b></p>
+  <pre><code>{{ file_out }}</code></pre>
+
+  <p><b>/system routerboard print</b></p>
+  <pre><code>{{ system_routerboard_out }}</code></pre>
+
+  <p><b>/system package print</b></p>
+  <pre><code>{{ system_package_out }}</code></pre>
+
+  <p><b>/ip route print</b></p>
+  <pre><code>{{ ip_route_out }}</code></pre>
+
+
+</div>
+{% endblock %}

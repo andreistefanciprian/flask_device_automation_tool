@@ -40,7 +40,25 @@
             <td>{{ device.wan }}</td>
             <td>{{ device.location }}</td>
             <td>6.43</td>
-            <td><a class="btn btn-outline-primary btn-sm" href="#" role="button">Ops Page</a></td>
+            <!--<td><a class="btn btn-outline-primary btn-sm" href="#" role="button">Ops Page</a></td>-->
+
+            <td>
+              <div class="btn-group">
+              <button type="button" class="btn btn-outline-primary dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Ops
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ url_for('devices.ops_status', device_id=device.id) }}" target="_blank">1. Show Status {{ device.id }}</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">2a. (STEP1) Upgrade Software</a>
+                <a class="dropdown-item" href="#">2a. (STEP2) Upgrade Firmware</a>
+                <a class="dropdown-item" href="#">2b. (STEP1) Downgrade</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">3. Load Config</a>
+              </div>
+              </div>
+            </td>
+
             <td><a class="btn btn-outline-warning btn-sm" href="{{ url_for('devices.update', device_id=device.id) }}" role="button">Edit</a></td>
             <td><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#del_modal{{ device.id }}">Delete</button></td>
           </tr>
