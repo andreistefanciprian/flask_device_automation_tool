@@ -55,3 +55,11 @@ def delete():
 
         return redirect(url_for('devices.list'))
     return render_template('delete.html',form=form)
+
+# Code for deleting records inside list records table
+@devices_blueprint.route('/<int:device_id>/delete', methods=['POST'])
+def delete_device(device_id):
+    device_id = Device.query.get_or_404(device_id)
+    db.session.delete(device_id)
+    db.session.commit()
+    return redirect(url_for('devices.list'))
