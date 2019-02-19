@@ -1,0 +1,71 @@
+<!-- This is the code to display flash messages for the wtforms validators -->
+
+{% if form.errors %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {% for error in form.errors %}
+  <strong>There is an issue with this field:</strong> {{ error }} <br>
+  {% endfor %}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %}
+
+{% extends "base.html" %}
+{% block content %}
+
+<!-- This is the code to display the add device form -->
+<div class="jumbotron">
+  <h1>Have a device that needs to be updated?</h1>
+  <hr>
+  <p>Update your device with the form below.</p>
+
+  <form method="POST" >
+    {# This hidden_tag is a CSRF security feature. #}
+    {{ form.hidden_tag() }}
+
+    <table>
+      <tr>
+        <td>{{ form.hostname.label }}</td>
+        <td>{{ form.hostname(class="form-control form-control-sm") }}</td>
+      </tr>
+        <tr>
+        <td>{{ form.nasid.label }}</td>
+        <td>{{ form.nasid(class="form-control form-control-sm") }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.ip.label }}</td>
+        <td>{{ form.ip(class="form-control form-control-sm") }}</td>
+        <td><small id="" class="text-muted">Doesn't take ip with mask. Eg 1.1.1.1/24</small></td>
+      </tr>
+      <tr>
+        <td>{{ form.gateway.label }}</td>
+        <td>{{ form.gateway(class="form-control form-control-sm") }}</td>
+        <td><small id="" class="text-muted">Must be in the same subnet as the 'IP Address of Device:' field.</small></td>
+      </tr>
+      <tr>
+        <td>{{ form.wan.label }}</td>
+        <td>{{ form.wan(class="form-control form-control-sm") }}</td>
+        <td><small id="" class="text-muted">Must be a public IP Address, reacheable on internet.</small></td>
+      </tr>
+      <tr>
+        <td>{{ form.location.label }}</td>
+        <td>{{ form.location(class="form-control form-control-sm") }}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>{{ form.submit(class="btn btn-outline-secondary btn-sm") }}</td>
+      </tr>
+    </table>
+
+  </form>
+
+</div>
+
+
+
+{% endblock %}
+
+
+
