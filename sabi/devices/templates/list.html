@@ -42,14 +42,14 @@
             <td>6.43</td>
             <td><a class="btn btn-outline-primary btn-sm" href="#" role="button">Ops Page</a></td>
             <td><a class="btn btn-outline-warning btn-sm" href="#" role="button">Edit</a></td>
-            <td><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#del_modal">Delete</button></td>
+            <td><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#del_modal{{ device.id }}">Delete</button></td>
           </tr>
 
   <!-- Modal for Pop Up-->
 
   {# https://getbootstrap.com/docs/4.1/components/modal/ #}
   {# Notice how the link with the id to the button above! #}
-  <div class="modal" tabindex="-1" role="dialog" id="del_modal">
+  <div class="modal" tabindex="-1" role="dialog" id="del_modal{{ device.id }}">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
