@@ -24,3 +24,6 @@ python app.py
 flask db migrate -m "adding a new column/table"
 flask db upgrade
 ```
+
+## Config templates have to be made available in order to build configs
+....
