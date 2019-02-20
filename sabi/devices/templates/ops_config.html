@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="jumbotron">
+  
+  <h1>Configuration of device {{ device_hostname }}</h1>
+  <hr>
+  
+  <pre><code>
+	{{ cfg_output }}
+  </code></pre>
+
+</div>
+
+{% endblock %}
+
+
+

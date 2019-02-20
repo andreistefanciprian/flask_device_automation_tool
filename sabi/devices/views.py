@@ -123,3 +123,26 @@ def ops_status(device_id):
         system_routerboard_out=system_routerboard_out,
         system_package_out=system_package_out,
         ip_route_out=ip_route_out)
+
+
+# Build config
+
+from sabi.devices.device_ops import build_config
+
+@devices_blueprint.route('/<int:device_id>/build_config', methods=['GET', 'POST'])
+def ops_build_config(device_id):
+
+    device = Device.query.get_or_404(device_id)
+
+    config_template = "mikrotik_config.rsc"
+    device_wan = device.wan
+    device_hostname = device.hostname
+    device_gateway = device.gateway
+
+    cfg_output = build_config(config_template, VHOSTNAME=device_hostname, VMKTWANIP=device_wan, VMKTWANGW=device_gateway)
+
+    return render_template('ops_config.html', 
+        device_wan=device_wan, 
+        device_hostname=device_hostname, 
+        device_gateway=device_gateway,
+        cfg_output=cfg_output)

@@ -48,7 +48,9 @@
                 Ops
               </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ url_for('devices.ops_status', device_id=device.id) }}" target="_blank">1. Show Status {{ device.id }}</a>
+                <a class="dropdown-item" href="{{ url_for('devices.ops_status', device_id=device.id) }}" target="show_status">1. Show Status {{ device.id }}</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{ url_for('devices.ops_build_config', device_id=device.id) }}" target="build_config">2. Build config</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">2a. (STEP1) Upgrade Software</a>
                 <a class="dropdown-item" href="#">2a. (STEP2) Upgrade Firmware</a>
