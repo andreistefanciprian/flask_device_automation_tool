@@ -7,7 +7,7 @@ def build_config(config_file_path, **kwargs):
 
 	This will build configuration files by replacing placeholders in config file.
 	First argument is the config file path name.
-	Second and next arguments after, are config placeholders you want to replace in config file.
+	Second and next arguments after, are config placeholders (key=value pairs) you want to replace in config file.
 	Eg: build_config("mikrotik_config.rsc", VHOSTNAME="Mikrotik-test", VMKTWANIP="192.168.0.11/24", VMKTWANGW="192.168.0.1")
 
 	"""
