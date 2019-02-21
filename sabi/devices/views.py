@@ -58,7 +58,7 @@ def delete():
         return redirect(url_for('devices.list'))
     return render_template('delete.html',form=form)
 
-# Delete records 
+# Delete records
 @devices_blueprint.route('/<int:device_id>/delete', methods=['POST'])
 def delete_device(device_id):
     device_id = Device.query.get_or_404(device_id)
@@ -106,17 +106,17 @@ def ops_status(device_id):
     device_nasid = device.nasid
     device_location = device.location
 
-    # Device commands (to be optimized with dictionaries via python and jinja + API/paramiko) 
+    # Device commands (to be optimized with dictionaries via python and jinja + API/paramiko)
     export_out = os.popen(f"sshpass -p 'Simpl3Passw0rd' ssh -o StrictHostKeyChecking=no admin@{device.wan} 'export'").read()
     file_out = os.popen(f"sshpass -p 'Simpl3Passw0rd' ssh -o StrictHostKeyChecking=no admin@{device.wan} 'file print'").read()
     system_routerboard_out  = os.popen(f"sshpass -p 'Simpl3Passw0rd' ssh -o StrictHostKeyChecking=no admin@{device.wan} 'system routerboard print'").read()
     system_package_out  = os.popen(f"sshpass -p 'Simpl3Passw0rd' ssh -o StrictHostKeyChecking=no admin@{device.wan} 'system package print'").read()
     ip_route_out  = os.popen(f"sshpass -p 'Simpl3Passw0rd' ssh -o StrictHostKeyChecking=no admin@{device.wan} 'ip route print'").read()
 
-    return render_template('ops_status.html', 
-        device_wan=device_wan, 
-        device_hostname=device_hostname, 
-        device_nasid=device_nasid, 
+    return render_template('ops_status.html',
+        device_wan=device_wan,
+        device_hostname=device_hostname,
+        device_nasid=device_nasid,
         device_location=device_location,
         export_out=export_out,
         file_out=file_out,
@@ -134,15 +134,15 @@ def ops_build_config(device_id):
 
     device = Device.query.get_or_404(device_id)
 
-    config_template = "mikrotik_config.rsc"
+    config_template = "/tmp/mikrotik_config.rsc" # config template file path can also be specified in the db when device of this type is instantiated
     device_wan = device.wan
     device_hostname = device.hostname
     device_gateway = device.gateway
 
     cfg_output = build_config(config_template, VHOSTNAME=device_hostname, VMKTWANIP=device_wan, VMKTWANGW=device_gateway)
 
-    return render_template('ops_config.html', 
-        device_wan=device_wan, 
-        device_hostname=device_hostname, 
+    return render_template('ops_config.html',
+        device_wan=device_wan,
+        device_hostname=device_hostname,
         device_gateway=device_gateway,
         cfg_output=cfg_output)
